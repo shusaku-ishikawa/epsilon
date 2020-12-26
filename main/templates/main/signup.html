@@ -4,7 +4,7 @@
     管理画面利用登録
 </h1>
 <div class="bg-white mx-auto mt-5 p-4 shadow" style="max-width: 600px;">
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form }}
         <div style="height: 50px;">
