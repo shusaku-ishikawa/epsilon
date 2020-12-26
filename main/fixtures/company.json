@@ -1,0 +1,34 @@
+[
+{
+    "model": "main.user",
+    "pk": 8,
+    "fields": {
+        "password": "pbkdf2_sha256$216000$Xt3uhTGLtXM0$pglk/0IjD0wGl6/coTPaSZYkpdHvp0PSJvxC6vwoMBo=",
+        "last_login": "2020-12-26T05:00:21.366Z",
+        "is_superuser": true,
+        "email": "admin8@admin.com",
+        "company_name": "株式会社テスト",
+        "company_name_furigana": "カブシキガイシャテスト",
+        "thumbnail": "main/static/img/fake/fakelogo.jpg",
+        "category1": "カテゴリ１",
+        "category2": "カテゴリ２",
+        "short_description": "金融機関･官公庁向け基幹システム開発を多数手がけています｡\r多言語医療問診支援システムおよび高齢者･聴覚障害者のための診療支援システムを企画開発しています｡\r現在新規事業として、除菌消臭アクアサニターの代理店販売を行い新たな取引先販路拡大を目指しています",
+        "description": "様々な業務を請け負っております",
+        "phone": "08058956869",
+        "short_delivery": false,
+        "representative_name": "社長太郎",
+        "established_at": "2020-12-02",
+        "major_clients": "クライアント１\rクライアント２\rクライアント３",
+        "major_products": "商品１\r商品２\r商品３",
+        "major_technologies": "技術１\r技術２\r技術３",
+        "major_facilities": "施設１\r施設２\r施設３",
+        "appeal_points": "あぴーーーる",
+        "poc_name": "担当太郎",
+        "website": "https://shusaku.ishikawa.com/hoge",
+        "is_staff": true,
+        "is_active": true,
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]

@@ -1,0 +1,17 @@
+{% extends 'main/admin_base.html' %}
+{% block content %}
+<h1 class="text-center text-3xl font-extrabold">
+    管理画面利用登録
+</h1>
+<div class="bg-white mx-auto mt-5 p-4 shadow" style="max-width: 600px;">
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <div style="height: 50px;">
+            
+        </div>
+        <button class="p-2 bg-green-400 border-2 text-white">登録</button>
+        <a href="{% url 'main:login' %}" class="p-2 text-gray-700 border-2 bg-white ">ログイン</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'main/admin_base.html' %}
+{% block content %}
+<h1 class="text-center text-3xl font-extrabold">
+    登録情報修正
+</h1>
+<div class="bg-white mx-auto mt-5 p-4 shadow" style="max-width: 600px;">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <button class="p-2 bg-green-400 border-2 text-white">登録</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends 'main/public_base.html' %}
+{% load static %}
+{% load myfilters %}
+{% block content %}
+<div class="align-center mb-5">
+    <img class="w-full" src="{% static 'img/billboard.jpg' %}" alt="">    
+</div>
+<div class="mb-5">
+    <h1 class="bg-green-400 text-white px-3 py-2 font-bold">
+        条件検索
+    </h1>
+    <table class="w-full border-collapse border">
+        <tbody>
+        <tr>
+            <th class="text-left bg-green-100 text-gray-600 p-3">
+            目的
+            </th>
+            <td class="text-green-600 p-3">
+            <a href="#" class="p-1">
+                keyword
+            </a>
+            <a href="#" class="p-1">
+                keyword
+            </a>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+<div class="w-full border-b-2 mb-2 px-5">
+    <div class="flex flex-row justify-between">
+        <div>
+            <span>全</span>
+            <b>{{ total_count }}</b>
+            <span>社中</span>
+            <b>{{ object_list.count }}</b>
+            <span>社表示</span>    
+        </div>
+        {% include 'main/components/paginator.html' %}
+    </div>
+</div>
+<div>
+    {% for company in object_list %}
+    <div class="flex md:flex-row sm:flex-row flex-col bg-green-50 p-4 border-2 mb-2 ">
+        <div class="flex flex-1">
+            <div class="flex-1">
+                <div class="flex mb-5">
+                    <h1 class="flex text-green-700 text-2xl font-extrabold">
+                        <a href="{% url 'main:detail_company' company.pk %}" class="my-auto mr-2 border-b-2">{{ company.company_name }}</a>
+                    </h1>
+                    {% if object.short_delivery %}
+                        {% include 'main/components/short_delivery.html' %}
+                    {% endif %}
+                    </div>
+                <div class="mb-2 text-sm">
+                [業種]大分類：{{ company.category1 }}　小分類：{{ company.category2 }}
+                </div>
+                <div class="mb-1">
+                    {{ company.short_description | linebreaks | abstract }}
+                </div>
+                <div class="mb-5">
+                <a href="#" class="border-b-2 text-green-700 text-sm">
+                    続きを読む
+                </a>
+                    
+                </div>
+                <div>
+                TEL:{{ company.phone }}
+                </div>
+            </div>
+        </div>
+        <div class="p-3 text-right">
+            {% if company.thumbnail %}
+            <img src="{{ company.thumbnail.url }}" style="min-width:180px!important;" alt="">
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}    
+</div>
+{% endblock %}
