@@ -105,22 +105,18 @@ class User(AbstractBaseUser, PermissionsMixin):
     major_clients = models.TextField(
         verbose_name = '主な取引先',
         blank = True,
-        default = ""
     )
     major_products = models.TextField(
         verbose_name = '主な製品',
         blank = True,
-        default=""
     )
     major_technologies = models.TextField(
         verbose_name = '主な技術',
         blank = True,
-        default=""
     )
     major_facilities = models.TextField(
         verbose_name = '主な施設',
         blank = True,
-        default=""
     )
     appeal_points = models.CharField(
         verbose_name = 'アピールポイント',
