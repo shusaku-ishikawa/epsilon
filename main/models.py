@@ -76,6 +76,9 @@ category2s = [
     ("CARE", "介護"),
 ]
 class User(AbstractBaseUser, PermissionsMixin):
+    class Meta:
+        verbose_name = '登録企業'
+        verbose_name_plural = '登録企業'
     def __str__(self):
         return self.username
     email = models.EmailField(_('Email'), unique=True)
@@ -121,7 +124,7 @@ class User(AbstractBaseUser, PermissionsMixin):
             return cat[0][1]
         else:
             return ''
-            
+
     short_description = models.TextField(
         verbose_name = '会社概要',
     )

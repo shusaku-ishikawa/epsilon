@@ -17,8 +17,32 @@ class MyUserCreationForm(UserCreationForm):
 
 class MyUserAdmin(UserAdmin):
   fieldsets = (
-    (None, {'fields': ('email', 'company_name', 'company_name_furigana', 'password')}),
-    (_('Personal info'), {'fields': ('short_description', 'description')}),
+    (None, {
+        'fields': (
+                'email',
+                'company_name',
+                'company_name_furigana',
+                'thumbnail',
+                'category1',
+                'category2',
+                'short_description',
+                'description',
+                'phone',
+                'short_delivery',
+                'representative_name',
+                'established_at',
+                'major_clients',
+                'major_products',
+                'major_technologies',
+                'major_facilities',
+                'appeal_points',
+                'poc_name',
+                'website',
+                'password'
+            )
+        }
+    ),
+    (_('Personal info'), {'fields': []}),
     (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',)}),
     (_('Important dates'), {'fields': ('last_login',)}),
   )
@@ -34,6 +58,6 @@ class MyUserAdmin(UserAdmin):
   list_display = ('email', 'company_name', 'company_name_furigana', 'thumbnail', 'is_staff', 'is_active', 'is_superuser')
 
 admin.site.site_title = '管理' 
-admin.site.site_header = 'Epsilon Admin ' 
+admin.site.site_header = 'ICTCO 管理画面' 
 admin.site.index_title = 'Menu'
 admin.site.register(User, MyUserAdmin)
