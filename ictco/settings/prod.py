@@ -5,7 +5,7 @@ DEBUG = True
 DATABASES = {
   'default': {
     'ENGINE': 'django.db.backends.mysql',
-    'NAME': 'epsilondb',
+    'NAME': 'ictcodb',
     'USER': 'root',
     'PASSWORD': 'P@ssw0rd',
     'HOST': '127.0.0.1',

@@ -2,31 +2,71 @@
 {% load static %}
 {% load myfilters %}
 {% block content %}
+
 <div class="align-center mb-5">
-    <img class="w-full" src="{% static 'img/billboard.jpg' %}" alt="">    
+    <img class="w-full" src="{% static 'img/billboard1.jpg' %}" alt="">    
 </div>
 <div class="mb-5">
-    <h1 class="bg-green-400 text-white px-3 py-2 font-bold">
+    <h1 class="bg-white text-black border border-black px-3 py-2 font-bold">
         条件検索
     </h1>
-    <table class="w-full border-collapse border">
-        <tbody>
-        <tr>
-            <th class="text-left bg-green-100 text-gray-600 p-3">
-            目的
-            </th>
-            <td class="text-green-600 p-3">
-            <a href="#" class="p-1">
-                keyword
-            </a>
-            <a href="#" class="p-1">
-                keyword
-            </a>
-            </td>
-        </tr>
-
-        </tbody>
-    </table>
+    <form action="">    
+        <table class="w-full border-collapse border bg-white text-black mb-1">
+            <tbody>
+            <tr class=" border-b">
+                <th class="text-left p-3 whitespace-nowrap">
+                キーワード
+                </th>
+                <td class="border-l p-2">
+                    <div class="font-bold">
+                        大分類
+                    </div>
+                    <div class="flex category">
+                        {% for cat1 in category1s  %}
+                            <div class="flex ml-3 items-center">
+                                <label for="{{ cat1.0 }}">{{ cat1.1 }}</label>
+                                <input class="ml-1" id="{{ cat1.0 }}" type="checkbox" value="{{ cat1.0 }}" {% if cat1.0|ifinlist:query_params.category1s %}checked{% endif %} name="category1s">
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="font-bold">
+                        小分類
+                    </div>
+                    <div class="flex flex-wrap category">
+                        {% for cat2 in category2s  %}
+                            <div class="flex ml-3 items-center">
+                                <label for="{{ cat2.0 }}">{{ cat2.1 }}</label>
+                                <input class="ml-1" id="{{ cat2.0 }}" type="checkbox" value="{{ cat2.0 }}" {% if cat2.0|ifinlist:query_params.category2s %}checked{% endif %} name="category2s">
+                            </div>
+                        {% endfor %}
+                    </div>
+                    
+                </td>
+            </tr>
+            <tr>
+                <th>企業名</th>
+                <td class="border-l p-1">
+                    <input type="text" name="query" class="border rounded p-1 w-full" value="{{ query_params.query}}">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="text-right">
+            <button
+                type="reset"
+                class="border rounded shadow bg-gray-600 text-white px-5 py-1 border-black"
+            >
+                検索条件クリア
+            </button> 
+            <button
+                type="submit"
+                class="border rounded shadow bg-white text-black px-5 py-1 border-black"
+            >
+                検索
+            </button>    
+        </div>
+    </form>
+    
 </div>
 <div class="w-full border-b-2 mb-2 px-5">
     <div class="flex flex-row justify-between">
@@ -41,12 +81,17 @@
     </div>
 </div>
 <div>
+    {% if not object_list.all %}
+        <div>
+            検索条件にマッチする企業はありませんでした。
+        </div>
+    {% endif %}
     {% for company in object_list %}
-    <div class="flex md:flex-row sm:flex-row flex-col bg-green-50 p-4 border-2 mb-2 ">
+    <div class="flex md:flex-row sm:flex-row flex-col bg-white p-4 shadow mb-2">
         <div class="flex flex-1">
             <div class="flex-1">
                 <div class="flex mb-5">
-                    <h1 class="flex text-green-700 text-2xl font-extrabold">
+                    <h1 class="flex text-black text-2xl font-extrabold">
                         <a href="{% url 'main:detail_company' company.pk %}" class="my-auto mr-2 border-b-2">{{ company.company_name }}</a>
                     </h1>
                     {% if object.short_delivery %}
@@ -54,17 +99,20 @@
                     {% endif %}
                     </div>
                 <div class="mb-2 text-sm">
-                [業種]大分類：{{ company.category1 }}　小分類：{{ company.category2 }}
+                [業種]大分類：{{ company.category1_name }}　小分類：{{ company.category2_name }}
                 </div>
                 <div class="mb-1">
                     {{ company.short_description | linebreaks | abstract }}
                 </div>
+                {% if company.short_description|iflongerthan240 %}
                 <div class="mb-5">
-                <a href="#" class="border-b-2 text-green-700 text-sm">
-                    続きを読む
-                </a>
-                    
+                
+                    <a href="#" class="border-b-2 text-gray-700 text-sm">
+                        続きを読む
+                    </a>
+                        
                 </div>
+                {% endif %}
                 <div>
                 TEL:{{ company.phone }}
                 </div>
@@ -78,4 +126,10 @@
     </div>
     {% endfor %}    
 </div>
+<style>
+    .company-card:hover {
+        box-shadow:0 6px 14px rgba(0, 0, 0, 0.24);
+        transform:translate(0, -2px);
+    }
+</style>
 {% endblock %}

@@ -4,9 +4,12 @@ from django.contrib.auth.forms import (
 from django import forms
 from .models import (
     User,
+    category1s,
+    category2s
 )
 
 form_input_base_class = 'p-2 form-input block border w-full mb-2'
+
 class LoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super(LoginForm, self).__init__(*args, **kwargs)

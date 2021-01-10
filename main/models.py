@@ -42,6 +42,39 @@ class UserManager(BaseUserManager):
 
         return self._create_user(email, password, **extra_fields)
 
+category1s = [
+    ('IT', 'IT'),
+    ('ART', 'アート・デザイン'),
+    ('CONTENTS', 'コンテンツ'),
+    ('LIFE', 'ライフサポート')
+]
+category2s = [
+    ("HP", "ホームページ作成"),
+    ("SYSTEM", "システム製作"),
+    ("PRINT", "印刷物デザイン"),
+    ("GRAPHIC", "グラフィックデザイン"),
+    ("ILLUST", "イラスト作成,撮影（写真）"),
+    ("MOVIE", "撮影（映像）"),
+    ("EDITING", "編集"),
+    ("DTP", "DTP"),
+    ("AUDIO", "音声収録"),
+    ("EVNT-PLN", "イベント企画"),
+    ("EVNT-SETUP", "イベント設営"),
+    ("SALES", "営業支援"),
+    ("SW", "ソフトウェア開発"),
+    ("TRANSL", "翻訳・通訳"),
+    ("CNSL", "コンサルティング"),
+    ("WRT", "文章ライティング"),
+    ("INTVW", "取材"),
+    ("NW", "ネットワーク施工"),
+    ("SVR", "サーバ関連"),
+    ("LAW", "法務"),
+    ("LABR", "労務"),
+    ("ACCNT", "財務・会計"),
+    ("GAME", "ゲーム製作"),
+    ("MED", "医療"),
+    ("CARE", "介護"),
+]
 class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.username
@@ -62,12 +95,33 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     category1 = models.CharField(
         verbose_name = '業種（大分類）',
-        max_length = 100
+        max_length = 100,
+        choices = category1s
     )
+    @property
+    def category1_name(self):
+        if not self.category1:
+            return ''
+        cat = [e for e in category1s if e[0] == self.category1]
+        if len(cat) > 0:
+            return cat[0][1]
+        else:
+            return ''
     category2 = models.CharField(
         verbose_name = '業種（小分類）',
-        max_length = 100
+        max_length = 100,
+        choices=category2s
     )
+    @property
+    def category2_name(self):
+        if not self.category2:
+            return ''
+        cat = [e for e in category2s if e[0] == self.category2]
+        if len(cat) > 0:
+            return cat[0][1]
+        else:
+            return ''
+            
     short_description = models.TextField(
         verbose_name = '会社概要',
     )

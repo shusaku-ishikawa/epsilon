@@ -65,7 +65,7 @@ class SignUp(CreateView):
         messages.success(self.request, f'ユーザ:{self.object.username} 登録完了しました。')
         return ret
 
-
+from .models import category1s, category2s
 class ListCompany(ListView):
     model = User
     template_name = 'main/list_company.html'
@@ -75,11 +75,29 @@ class ListCompany(ListView):
         total_count = self.get_queryset().count()
         c = super().get_context_data(**kwargs)
         c['total_count'] = total_count
+        c['category1s'] = category1s
+        c['category2s'] = category2s
+        c1 = self.request.GET.getlist('category1s')
+        c2 = self.request.GET.getlist('category2s')
+        c['query_params'] = { 
+            'category1s': c1,
+            'category2s': c2,
+            'query': self.request.GET.get('query', '')
+        }
         print(c['total_count'])
         return c
 
     def get_queryset(self):
         queryset = super().get_queryset().order_by('-pk')
+        c1 = self.request.GET.getlist('category1s')
+        c2 = self.request.GET.getlist('category2s')
+        query = self.request.GET.get('query', None)
+        if len(c1) > 0:
+            queryset = queryset.filter(category1__in = c1)
+        if len(c2) > 0:
+            queryset = queryset.filter(category2__in = c2)
+        if query:
+            queryset = queryset.filter(company_name__icontains = query)
         return queryset
 
 class DetailCompany(DetailView):

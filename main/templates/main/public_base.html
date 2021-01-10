@@ -8,14 +8,14 @@
         <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     </head>
     <body class="bg-gray-50">
+        {% include 'main/components/navbar.html' %}
         <div class="container mx-auto" style="max-width: 1024px">
-            {% include 'main/components/navbar.html' %}
             <div class="py-3 px-2">
                 {% block content %}
                 {% endblock %}
             </div>
-            {% include 'main/components/footer.html' %}
         </div>
+        {% include 'main/components/footer.html' %}
         {% block style %}
         {% endblock %}
     </body>
