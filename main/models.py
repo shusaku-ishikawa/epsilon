@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import BaseUserManager, PermissionsMixin
 from django.utils.translation import ugettext_lazy as _
+from datetime import datetime
 
 from django.core.validators import (
     RegexValidator, MaxValueValidator, MinValueValidator
@@ -77,6 +78,14 @@ category2s = [
     ("CARE", "介護"),
     ('OTHER', 'その他'),
 ]
+def get_years():
+    this_year = datetime.today().year
+    ys = []
+    for i in range(100):
+        y = str(this_year - i)
+        ys.append((y, y))
+    return ys
+
 class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = '登録企業'
@@ -156,9 +165,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     established_at = models.CharField(
         verbose_name = '創業',
         max_length = 100,
-        choices = [
-            ('1900', '1900')
-        ]
+        choices = get_years()
     )
 
     major_clients = models.TextField(
