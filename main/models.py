@@ -46,7 +46,8 @@ category1s = [
     ('IT', 'IT'),
     ('ART', 'アート・デザイン'),
     ('CONTENTS', 'コンテンツ'),
-    ('LIFE', 'ライフサポート')
+    ('LIFE', 'ライフサポート'),
+    ('OTHER', 'その他'),
 ]
 category2s = [
     ("HP", "ホームページ作成"),
@@ -74,6 +75,7 @@ category2s = [
     ("GAME", "ゲーム製作"),
     ("MED", "医療"),
     ("CARE", "介護"),
+    ('OTHER', 'その他'),
 ]
 class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
