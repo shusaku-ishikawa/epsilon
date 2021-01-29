@@ -21,7 +21,7 @@
                     <div class="font-bold">
                         大分類
                     </div>
-                    <div class="flex category">
+                    <div class="flex flex-wrap category">
                         {% for cat1 in category1s  %}
                             <div class="flex ml-3 items-center">
                                 <label for="{{ cat1.0 }}">{{ cat1.1 }}</label>
@@ -88,7 +88,7 @@
     {% endif %}
     {% for company in object_list %}
     <div class="flex md:flex-row sm:flex-row flex-col bg-white p-4 shadow mb-2">
-        <div class="flex flex-1">
+        <div class="flex flex-grow">
             <div class="flex-1">
                 <div class="flex mb-5">
                     <h1 class="flex text-black text-2xl font-extrabold">
